@@ -1,16 +1,15 @@
 import React,{useRef, useState} from 'react'
 
-
-
-export default function DiaryEditor () {
-  const authorInput = useRef();  
-  const contentInput = useRef();
+export default function DiaryEditor ({onCreate}) {
   const [state,setState] = useState({
     author: "",
     content: "",
     emotion: 1,
   })
-
+  
+  const authorInput = useRef();  
+  const contentInput = useRef();
+  
   const handleChangeState = (e) => {
     setState({
       ...state,
@@ -29,6 +28,8 @@ export default function DiaryEditor () {
       contentInput.current.focus();
       return;
     }
+
+    onCreate(state.author, state.emotion, state.content)
     alert('저장 성공!')
   }
     return (
