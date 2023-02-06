@@ -1,15 +1,27 @@
 import React from 'react';
 
-const DiaryItem = ({author, content, created_date, emotion, id}) => {
+const DiaryItem = ({onDelete,author, content, created_date, emotion, id}) => {
     return (
         <div className="DiaryItem">
-            <div key={id}> 
-                    <span>작성자 : {author}</span>
-                    <span> | 감정점수 : {emotion}</span>
-                    <span> | 일기 : {content}</span>
-                    <span> | 작성시간 : {new Date(created_date).toLocaleString()}</span>
-                </div>
+        <div className="info">
+          <span className="author_info">
+            작성자 : {author} | 감정점수 : {emotion}
+          </span>
+          <br />
+          <span className="date">{new Date(created_date).toLocaleString()}</span>
         </div>
+        <div className="content">{content}</div>
+        <button
+            onClick={()=>{
+            console.log(id)
+            if(window.confirm(`${id}번째 일기를 정말 삭제할까요?`)){
+                onDelete(id)
+            }
+        }}
+        >
+          삭제하기
+        </button>
+      </div>
     );
 };
 
