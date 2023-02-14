@@ -1,6 +1,6 @@
 import React,{useRef, useState} from 'react'
 
-export default function DiaryEditor ({onCreate}) {
+ const DiaryEditor = ({ onCreate }) => {
   const [state,setState] = useState({
     author: "",
     content: "",
@@ -57,4 +57,6 @@ export default function DiaryEditor ({onCreate}) {
         </div>
     </div>
   )
-}
+};
+
+export default React.memo(DiaryEditor)
