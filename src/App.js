@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import DiaryEditor from "./DiaryEditor";
 import DiaryList from "./DiaryList";
@@ -29,7 +29,7 @@ function App() {
   }, [])
   
 
-  const onCreate = (author, emotion, content) => {
+  const onCreate = useCallback((author, emotion, content) => {
     const created_date = new Date().getTime();
     const newItem = {
       author,
@@ -39,8 +39,8 @@ function App() {
       id: dataId.current,
     };
     dataId.current += 1;
-    setData([newItem, ...data]);
-  };
+    setData((data)=> [newItem, ...data]);
+  }, []);
 
   const onRemove = (targetId) => {
     console.log(`${targetId}가 삭제 되었습니다.`);
